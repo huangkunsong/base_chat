@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chat login</title>
+    <link href="css/login.css">
+    <script src="js/lib/require.js" defer="defer"></script>
+    <script src="js/login.js" defer="defer"></script>
+</head>
+<body>
+<div id="main">
+    <div id="header"></div>
+    <div id="content">
+        <div id="chatRoomList">
+            <%
+                if(chatRoomList){
+                    chatRoomList.forEach(function (item) {
+            %>
+                    <li class="chatRoomItem"><%= item.roomName %></li>
+            <%
+                    })
+                }
+            %>
+        </div>
+        <div id="login">
+            <form>
+                <label>用户名：<input type="text" name="userName"></label><br>
+                <label>密码：<input type="password" name="passWord"></label><br>
+                <input type="button" value="登录" class="login">
+                <input type="button" value="注册" class="register">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
