@@ -1,31 +1,28 @@
 /**
- * Created by Huangkunsong on 2017/6/6.
+ * Created by rookie on 2017/6/7
+ * All copyright belongs to rookie.
+ * A learning to program a rookie.
+ * github : https://github.com/huangkunsong
  */
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-// eslint-disable-next-line no-unused-vars
-const log = require("./middleware/log");
+const Logger = require("./middleware/log4js");
 
-/**user,chat**/
+const loginRouter = require("./router/login");
 
 const app = express();
 
+Logger.connectLogger(app);
 app.use(express.static(path.join(__dirname, "../static")));
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "template"));
-/*app.use(log);
-*
-* homeRouter,请求数据库获取数据
-* userRouter,注册登录
-* chatRouter,聊天相关*/
-app.get("/", function (request, response) {
-    return response.render("login", {
-        chatRoomList : [{roomName : "asdasd"}, {roomName : "asdasdd"}]
-    });
-});
+
+app.use("/", loginRouter);
+
+/*app.use(log);*/
 
 app.listen(80);
 
