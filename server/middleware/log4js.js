@@ -5,9 +5,10 @@
  * github : https://github.com/huangkunsong
  */
 const log4js = require("log4js");
-const LOG4J_CONFIG = require("../config/log4j");
+const path = require("path");
+const log4jConfig = require("../config/log4j");
 
-log4js.configure(LOG4J_CONFIG);
+log4js.configure(log4jConfig(path.join(__dirname, "../logs")));
 
 const root = log4js.getLogger("root");
 const console = log4js.getLogger("console");
