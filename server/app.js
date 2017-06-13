@@ -22,7 +22,5 @@ app.set("views", path.join(__dirname, "template"));
 
 app.use("/", loginRouter);
 
-/*app.use(log);*/
-
 app.listen(80);
 
