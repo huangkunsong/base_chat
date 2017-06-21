@@ -16,7 +16,9 @@ mongoose.connect(dbUrl, {
         autoIndex : true,
     },
 });
+
 const db = mongoose.connection;
+
 db.on("connected", function () {
     Logger.info("Mongoose connection to " + dbUrl);
 });

@@ -32,7 +32,7 @@ const Logger = {
     info : proxy("info"),
     warn : proxy("warn"),
     error : proxy("error"),
-    connectLogger : function (app, level = "info", consoleOutput = false) {
+    connectLogger : function (app, consoleOutput = false, level = "info") {
         if (consoleOutput) {
             (function (request) {
                 const oldLog = request.log;

@@ -3,32 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>chat login</title>
-    <link href="css/login.css">
-    <script src="js/lib/require.js" defer="defer"></script>
-    <script src="js/login.js" defer="defer"></script>
+    <link rel="stylesheet" type="text/css" href="/statics/css/login.css">
+    <script src="/statics/js/lib/require.js" data-main="/statics/js/login" defer="defer"></script>
 </head>
 <body>
 <div id="main">
-    <div id="header"></div>
+    <div id="header">聊天室</div>
     <div id="content">
         <div id="chatRoomList">
-            <%
-                if(chatRoomList){
-                    chatRoomList.forEach(function (item) {
-            %>
-                    <li class="chatRoomItem"><%= item.roomName %></li>
-            <%
-                    })
-                }
-            %>
         </div>
         <div id="login">
-            <form>
-                <label>用户名：<input type="text" name="userName"></label><br>
-                <label>密码：<input type="password" name="passWord"></label><br>
-                <input type="button" value="登录" class="login">
-                <input type="button" value="注册" class="register">
+            <h4 id="message"></h4>
+            <form id="loginForm">
+                <pre><label>用户名：<input type="text" name="account"/></label></pre>
+                <pre><label>  密码：<input type="password" name="passWord"/></label></pre>
+                <p class="btns">
+                    <input id="submit" type="button" value="登录">
+                    <input id="register" type="button" value="注册">
+                </p>
             </form>
+            <div id="loginAfter">
+                <pre>我的房间：       <span class="hrefSty" id="createChatRoom">新建</span>  <span class="hrefSty" id="cancalChatRoom">取消</span></pre>
+                <div id="newChatRoom">
+                    <form id="chatRoom">
+                        <pre><label>房间名：<input type="text" name="chatRoomName" /> </label></pre>
+                        <pre><label>  描述：<input type="text" name="description" /> </label></pre>
+                        <p class="btns">
+                            <input id="chatRoomSubmit" type="button" value="创建" >
+                            <input id="chatRoomReset" type="reset" value="重置" >
+                        </p>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
