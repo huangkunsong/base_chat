@@ -13,7 +13,7 @@ log4js.configure(log4jConfig(path.join(__dirname, "../logs")));
 const root = log4js.getLogger("root");
 const console = log4js.getLogger("console");
 const request = log4js.getLogger("request");
-
+const socket = log4js.getLogger("socket");
 /**
  * 封装日记记录到文件时,将记录信息打印到控制台和root日志文件
  * @param level 日志级别
@@ -48,6 +48,10 @@ const Logger = {
             //定制日志格式
             /*format : ":method"*/
         }));
+    },
+    socket : function (message, level = "info") {
+        socket[level](message);
+        console[level](message);
     },
 };
 

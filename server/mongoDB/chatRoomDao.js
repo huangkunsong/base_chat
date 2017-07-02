@@ -7,7 +7,6 @@ const Logger = require("../middleware/log4js");
 const chatRoomSchame = require("./Schame/chatRoomSchame");
 
 const ChatRoomModel = moogoose.model("chatRoom", chatRoomSchame);
-
 function createChatRoom (chatRoomVO) {
     return ChatRoomModel.create(chatRoomVO).then(function (){
         Logger.info(`Create chat room ${chatRoomVO.chatRoomName} success.`);
@@ -15,7 +14,7 @@ function createChatRoom (chatRoomVO) {
 }
 
 function findTopChatRoom (limit = 50){
-    return ChatRoomModel.find({}).sort("-createdAt").limit(limit);
+    return ChatRoomModel.find({}).sort({createdAt : -1}).limit(limit);
 }
 
 module.exports = {

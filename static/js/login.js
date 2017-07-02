@@ -5,13 +5,13 @@ require.config({
     baseUrl : "statics/js/lib",
     paths : {
         jquery : "jquery-3.1.1",
+        socketIO : "/socket.io/socket.io",
     },
 });
 
-define(["jquery"], function ($) {
-    
+define(["jquery", "socketIO"], function ($, SocketIO) {
     let userName = getCookie("userName");
-    
+    const socketIO = SocketIO.connect("http://localhost");
     if (!userName) {
         $("#loginForm").show();
         $("#register").click(function () {
@@ -28,8 +28,10 @@ define(["jquery"], function ($) {
                     $("#message").text(data.message);
                 } else {
                     userName = getCookie("userName") || "";
+                    loadTopChatRoom();
                     $("#message").text(`Welcome,${userName}`);
                     $("#loginForm").hide();
+                    $("#loginAfter").show();
                 }
             });
         });
@@ -81,6 +83,9 @@ define(["jquery"], function ($) {
                 const author = $("<div class='author'/>").text(`author : ${item.author || "anonymity"}`).attr("title", item.author);
                 const count = $("<div class='count' />").text(`Persion : ${item.count}`);
                 const chatRoom = $("<div class='item' />").append(name).append(desc).append(author).append(count);
+                if (userName) {
+                    chatRoom.click(joinChatRoom.bind(chatRoom, item._id));
+                }
                 chat.append(chatRoom);
             });
         });
@@ -95,4 +100,14 @@ define(["jquery"], function ($) {
             }
         }
     }
+    function joinChatRoom (id){
+        socketIO.emit("joinChat", id, function (){
+            console.log(arguments);
+        });
+    }
+    
+    socketIO.on("message", function (message) {
+        console.log(message);
+    });
+    
 });

@@ -47,6 +47,14 @@ const log4jConfig = function (basePath = __dirname, level = "DEBUG") {
                 pattern : "yyyyMMddhh.log",
                 category : "request",
             },
+            //存放Socket日志
+            {
+                type : "dateFile",
+                alwaysIncludePattern : true,
+                filename : path.join(basePath, "socket/"),
+                pattern : "yyyyMMddhh.log",
+                category : "socket",
+            },
         ],
         //设置替换console中各种日志方法
         replaceConsole : true,

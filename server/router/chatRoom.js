@@ -8,7 +8,7 @@ const Logger = require("../middleware/log4js");
 
 router.get("/findTopChatRoom", function (request, response) {
     ChatRoomDao.findTopChatRoom().then(function (result){
-        response.end(JSON.stringify(result));
+        response.json(result);
     }).catch(function (e) {
         Logger.error(e);
         response.state(500);
